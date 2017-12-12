@@ -3,7 +3,6 @@
 OS     := $(shell uname -s)
 
 ifneq (${OS}, Darwin)
-LDFLAGS += -static
 endif
 
 CFLAGS += -D_GNU_SOURCE=1 -O3 -Wall -Werror -Winline -pedantic-errors -std=c99
@@ -23,7 +22,7 @@ clean:
 	$(CC) -c $(CFLAGS) -DJT_SHA=\"$(SHA)\" $< -o $@
 
 jt: jt.o stack.o buffer.o js.o util.o
-	$(CC) $(LDFLAGS) $^ -o $@
+	$(CC) $^ -o $@
 
 build/mem/%.o: %.c
 	mkdir -p build/mem
